@@ -17,7 +17,7 @@ brew services start nginx
 nginx starts and runs on 8080 by default
 modify nginx.conf as in code
 
-### run the apis 
+### Start API
 ```
 nohup Python apis.py
 ```
