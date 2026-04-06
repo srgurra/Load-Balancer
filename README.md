@@ -85,13 +85,13 @@ ssl_certificate_key C:/nginx/ssl/server.key;
 cd C:\nginx
 nginx -s reload
 ```
-
+---
 ### For SSL on Windows:
 
 Use OpenSSL for Windows or generate certificates elsewhere
 Place .crt and .key files in C:\nginx\ssl\
 
-
+---
 ## Running the Load Balancer
 ### Step 1: Start Backend API Servers
 Start multiple instances on different ports (Terminal/PowerShell):
@@ -145,7 +145,7 @@ sudo systemctl restart nginx
 cd C:\nginx
 nginx -s reload
 ```
-
+---
 ## Testing the Load Balancer
 ```bash
 # Test health endpoint
@@ -162,7 +162,7 @@ curl -X POST http://localhost/auth/ \
   -H "Content-Type: application/json" \
   -d '{"user":"test"}'
 ```
-
+---
 ## SSL Configuration
 macOS with Certbot
 ```bash
@@ -181,14 +181,37 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout C:\nginx\ssl\server.key \
   -out C:\nginx\ssl\server.crt
 ```
-
+---
 ## Troubleshooting
-Issue	Solution
-Port 80/443 already in use	Change listen port in nginx.conf or kill existing process
-Permission denied	Use sudo on Linux/macOS or run PowerShell as Admin on Windows
-nginx: command not found	Reinstall NGINX or add to PATH
-SSL certificate not found	Verify certificate paths match your OS in nginx.conf
-502 Bad Gateway	Check if backend servers (api.py) are running
+
+| Issue | Solution |
+|-------|----------|
+| Port 80/443 already in use | Change listen port in nginx.conf or kill existing process |
+| Permission denied | Use sudo on Linux/macOS or run PowerShell as Admin on Windows |
+| nginx: command not found | Reinstall NGINX or add to PATH |
+| SSL certificate not found | Verify certificate paths match your OS in nginx.conf |
+| 502 Bad Gateway | Check if backend servers (api.py) are running |
+
+---
+## SSL Configuration
+### macOS with Certbot
+```bash
+brew install certbot
+brew install certbot-nginx
+sudo certbot --nginx -d your-domain.com
+```
+### Linux with Certbot
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d your-domain.com
+```
+### Windows - Generate Self-Signed Certificate
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout C:\nginx\ssl\server.key \
+  -out C:\nginx\ssl\server.crt
+```
+---
 
 ## Configuration Notes
 - Load balancing algorithm: least_conn (can change to round_robin, ip_hash, etc.)
