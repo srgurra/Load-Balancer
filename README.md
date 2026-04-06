@@ -1,38 +1,29 @@
-# Load-Balancer (NGINX)
+# Installation Instructions
 
-Load Balancer is a server that distribute traffic to different servers. It can also act as reverse proxy to redirect different apis to different servers
+## macOS
+1. Open the Terminal.
+2. Ensure you have Homebrew installed. Run:
+   ```bash
+   /bin/bash -c "/bin/bash -c 'which brew || (curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash)'"
+   ```
+3. Install the Load Balancer using:
+   ```bash
+   brew install load-balancer
+   ```
 
-Implemented for nginx server on local machine to act as load balancer
+## Linux
+1. Open your terminal.
+2. Update your package list and install the Load Balancer using:
+   ```bash
+   sudo apt update && sudo apt install load-balancer -y
+   ```
 
-## Configuration of nginx as a load balancer
+## Windows
+1. Download the installer from the release section of the repository.
+2. Run the installer and follow the setup instructions.
+3. After installation, you can run the Load Balancer from the command line by entering:
+   ```cmd
+   load-balancer
+   ```
 
-
-Install nginx and start on machine
-
-```
-brew install nginx
-brew services start nginx
-```
-
-nginx starts and runs on 8080 by default
-modify nginx.conf as in code
-
-### Start API
-```
-nohup Python api.py
-```
-
-nginx run on some port and is made it public. so it listens on 0.0.0.0 i.e., all calls over internet
-
-once it receives a https call it redirects to servers(that apis are running), update them accordingly in location block
-
-It can also redirect based on path like /orders to one server and /users to another etc.,
-
-### SSL
-This load balancer is made secure using SSL
-for SSL we need to install certbot 
-```
-brew install certbot
-generate certificate certbot --nginx
-```
-
+For any other issues or support, please refer to the documentation on the GitHub repository.
