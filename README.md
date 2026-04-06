@@ -19,7 +19,7 @@ modify nginx.conf as in code
 
 ### Start API
 ```
-nohup Python apis.py
+nohup Python api.py
 ```
 
 nginx run on some port and is made it public. so it listens on 0.0.0.0 i.e., all calls over internet
